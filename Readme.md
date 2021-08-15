@@ -1,27 +1,22 @@
-# Final Year Project
-## Title: Open-Source Tool for Register Verification and RTL Generation for Register Configuration 
-**Pre-requisites to be installed**: EUVM, Icarus Verilog, Gnumeric, GCC <br>
-**For Installing EUVM visit:** http://uvm.io/download/
+# Automated-RTL-and-RAL-model-Generation-for-QEMU
 ## Steps to be followed
-***For Debug Functionality, a separate Readme file is provied in Interactive Register Debug Folder***<br>
-**For generating RTL using given specification file, follow following steps**
-1. Open `csv_render_mako.py` file. Depending on the template you want to choose, comment/uncomment the respective Template code line.<br>
-The code snippet is as follows:
+
+### For generating RTL using given specification file, follow these steps:
+1. Go to `RTL Generation` directory, open terminal and type any of the following command as per the requirement:<br>
+- For Generating APB Template:<br>
 ```
-mytemplate = Template(filename='apb_slave.v.mako',module_directory='../../Project_work/mako-templates')
-# mytemplate = Template(filename='ahb_template.v.mako', module_directory='../../Project_work/ahb')
+$python3 csv_render_mako.py ../CSV\ Files/csv_file_name.csv apb_slave.v.mako > apb_slave.v
 ```
-2. Mention the CSV file which you need to import in line 24 of `csv_render_mako.py`.
+- For Generating AHB Template:<br>
 ```
-with open('../../Project_work/csv_file_name.csv', mode='r') as csv_file:
+$python3 csv_render_mako.py ../CSV\ Files/csv_file_name.csv ahb_slave.v.mako > ahb_slave.v
 ```
-3. Now to generate the RTL output for a particular slave model, type the following command:
-```
-$ python3 csv_render_mako.py > slave_name.v
-```
-This will generate the verilog file for the respective template. <br>
-**For generating RAL model**
-1. Compile the D files of the template `csv2reg.d` and `csv2regsv.d` by running following command:
+Here, replace *csv_file_name.csv* with the name of the CSV file you want to use.<br><br>
+<br><br>
+
+### For generating RAL model follow these steps:
+**Note: Make sure ldc2 compiler is installed for proper compilation of the D files.**
+1. Compile the D files of the template `csv2reg.d` and `csv2regsv.d` present in the `RAL Model Generation` directory by running following command:
 ```
 $ldc2 csv2reg.d
 $ldc2 csv2regsv.d
@@ -29,21 +24,21 @@ $ldc2 csv2regsv.d
 2. Now to generate the RAL models using given specification file, run following command:<br>
 For Register Model in D:
 ```
-./csv2reg csv_file_name.csv csv_file_name > demo_reg_model_d.d
+$./csv2reg ../CSV\ Files/csv_file_name.csv csv_file_name > demo_reg_model_d.d
 ```
 For Register Model in SV:
 ```
-./csv2regsv csv_file_name.csv csv_file_name > demo_reg_model_sv.sv
+$./csv2regsv ../CSV\ Files/csv_file_name.csv csv_file_name > demo_reg_model_sv.sv
 ```
 <br><br>
-For example for the specification sheet provided with this code, the command will be: <br>
+For example for the specification sheet *demo_reg.csv* provided with this code, the command will be: <br>
 For Register Model in D:
 ```
-./csv2reg demo_reg.csv demo_reg > demo_reg_model_d.d
+$./csv2reg demo_reg.csv demo_reg > demo_reg_model_d.d
 ```
 For Register Model in SV:
 ```
-./csv2regsv demo_reg.csv demo_reg > demo_reg_model_sv.sv
+$./csv2regsv demo_reg.csv demo_reg > demo_reg_model_sv.sv
 ```
 
 Now these files which are generated can be used for further use in the Project.
