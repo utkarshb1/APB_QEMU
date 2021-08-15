@@ -6,7 +6,11 @@
 from mako.template import Template
 import csv
 import pdb
+import sys
 ###################
+path = sys.argv[1]
+mytemplate = Template(filename=sys.argv[2],module_directory = './RTL Generation')
+
 # Declaring Variables
 registers = []
 field_name = []
@@ -18,14 +22,9 @@ reg_names = []
 field_prop = []
 field_size = []
 st2 = '';st3 = ''
-# Loading the Slave Mako template
-mytemplate = Template(filename='apb_slave.v.mako',module_directory='./RTL Generation')
-# mytemplate = Template(filename='ahb_template.v.mako', module_directory='./RTL Generation')
 
 # Loading the CSV file and passing the info to MAKO
-# Change csv file name to respective file name if you want to generate 
-# RTL file for 10, 100, 1000 registers respectively
-with open('../CSV Files/demo_reg.csv', mode='r') as csv_file:
+with open(path, mode='r') as csv_file:
     # Creating a dictionary of the data of the specification sheet 
     csv_reader = csv.DictReader(csv_file)
     for row in csv_reader:
