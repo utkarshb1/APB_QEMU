@@ -12,7 +12,8 @@ $python3 csv_render_mako.py ../CSV\ Files/csv_file_name.csv apb_slave.v.mako > a
 $python3 csv_render_mako.py ../CSV\ Files/csv_file_name.csv ahb_slave.v.mako > ahb_slave.v
 ```
 Here, replace *csv_file_name.csv* with the name of the CSV file you want to use.<br><br>
-<br><br>
+
+---
 
 ### For generating RAL model follow these steps:
 **Note: Make sure ldc2 compiler is installed for proper compilation of the D files.**
@@ -30,7 +31,8 @@ For Register Model in SV:
 ```
 $./csv2regsv ../CSV\ Files/csv_file_name.csv csv_file_name > demo_reg_model_sv.sv
 ```
-<br><br>
+***
+
 For example for the specification sheet *demo_reg.csv* provided with this code, the command will be: <br>
 For Register Model in D:
 ```
